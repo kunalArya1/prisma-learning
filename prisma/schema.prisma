@@ -8,8 +8,18 @@ datasource db {
 }
 
 model User{
-  id Int @default(autoincrement()) @id
-  username String @unique
-  password String 
-  age Int
+  id        Int       @default(autoincrement()) @id
+  username  String    @unique
+  password  String 
+  age       Int
+  todos     Todo[]
+}
+
+model Todo {
+  id              Int         @id
+  title           String 
+  description     String 
+  done            Boolean     @default(false)
+  userId          Int  
+  user            User        @relation(fields: [userId],references: [id])
 }
